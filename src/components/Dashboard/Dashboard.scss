@@ -1,0 +1,63 @@
+@use "../../styles/variables";
+
+@mixin flexxer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-container {
+    @include flexxer();
+    width: calc(100vw - 20px);
+    height: auto;
+    min-height: calc(100vh - 4px);
+    border: 2px solid variables.$tron-blue;
+
+    & .search-box {
+        display: flex;
+        align-items: center;
+        width: auto;
+        height: auto;
+        min-height: 50px;
+
+        & label {
+            font-size: 1.4rem;
+            color: variables.$tron-cyan;
+            margin-right: 5px;
+        }
+
+        & input {
+            width: 300px;
+            height: 30px;
+            font-size: 1.3rem;
+            color: variables.$tron-cyan;
+        }
+
+        & button {
+            background: none;
+            border: 1px solid variables.$tron-blue-three;
+            font-weight: bold;
+            padding: 0;
+            cursor: pointer;
+            outline: inherit;
+            width: 100px;
+            height: 35px;
+            font-size: 1.3rem;
+            color: variables.$tron-orange;
+
+            &:focus {
+                outline: solid variables.$tron-blue-four;
+            }
+        }
+    }
+
+    & .todo-item {
+        color: variables.$tron-orange;
+        font-size: 1.5rem;
+        width: 500px;
+        height: auto;
+        min-height: 30px;
+        border: 1px solid variables.$tron-blue-three;
+        cursor: pointer;
+    }
+}

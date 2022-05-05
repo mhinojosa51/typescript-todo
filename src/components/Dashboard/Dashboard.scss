@@ -8,9 +8,17 @@
 
 .dashboard-container {
     @include flexxer();
-    width: calc(100vw - 20px);
+    width: calc(100vw - 16px);
     height: auto;
     min-height: calc(100vh - 4px);
+
+    &.light {
+        background-color: variables.$light-theme;
+    }
+
+    &.dark {
+        background-color: variables.$dark-theme;
+    }
 
     & .search-box {
         display: flex;

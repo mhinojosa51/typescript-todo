@@ -1,5 +1,10 @@
 import { render } from "@testing-library/react";
-import { FunctionComponent, useCallback, useEffect, useState } from "react";
+import React, {
+    FunctionComponent,
+    useCallback,
+    useEffect,
+    useState,
+} from "react";
 import { URLS } from "../../enums/urls";
 import "./Dashboard.scss";
 import { Todo } from "../types";
@@ -8,6 +13,7 @@ import { ListItem } from "../ListItem";
 export const Dashboard: FunctionComponent = (): JSX.Element => {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [searchText, setSearchText] = useState<string>("");
+    const [theme, setTheme] = useState<string>("light");
 
     useEffect(() => {
         async function fetchData() {
@@ -25,17 +31,20 @@ export const Dashboard: FunctionComponent = (): JSX.Element => {
         return todos.filter((todo: Todo) => todo.title.includes(searchParam));
     };
 
-    const deleteToDo = (id: number) => {
-        setTodos(todos.filter((todo: Todo) => todo.id !== id));
+    const deleteToDo = (ev: React.MouseEvent<HTMLDivElement>) => {
+        if (ev.currentTarget.dataset.id) {
+            let selectedId = +ev.currentTarget.dataset.id;
+            setTodos(todos.filter((todo: Todo) => todo.id !== selectedId));
+        }
     };
 
-    const memoizedDeleteToDo = useCallback(deleteToDo, []);
+    const memoizedDeleteToDo = useCallback(deleteToDo, [todos]);
 
     const renderTodoList = (): JSX.Element[] => {
         return searchTodos(todos).map((todo: Todo) => {
             return (
                 <ListItem
-                    onClick={() => deleteToDo(todo.id)}
+                    onClick={memoizedDeleteToDo}
                     id={todo.id}
                     title={todo.title}
                     key={todo.id}
@@ -45,7 +54,7 @@ export const Dashboard: FunctionComponent = (): JSX.Element => {
     };
 
     return (
-        <div className='dashboard-container'>
+        <div className={`dashboard-container ${theme}`}>
             <section className='search-box'>
                 <label htmlFor='search-todos'>Search</label>
                 <input
@@ -53,7 +62,10 @@ export const Dashboard: FunctionComponent = (): JSX.Element => {
                     type='text'
                     onChange={(ev) => setSearchText(ev.currentTarget.value)}
                 />
-                {/* <button className='search-button'>Submit</button> */}
+            </section>
+            <section className='theme-selector'>
+                <button onClick={() => setTheme("dark")}>Dark Theme</button>
+                <button onClick={() => setTheme("light")}>Light Theme</button>
             </section>
             {renderTodoList()}
         </div>

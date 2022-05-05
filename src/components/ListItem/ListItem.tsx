@@ -1,20 +1,22 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, memo } from "react";
 import "./ListItem.scss";
 
 interface ListItemIProps {
     id: number;
     title: string;
-    onClick: () => void;
+    onClick: React.MouseEventHandler;
 }
 
-export const ListItem: FunctionComponent<ListItemIProps> = ({
+const ListItemBase: FunctionComponent<ListItemIProps> = ({
     id,
     title,
     onClick,
 }): JSX.Element => {
     return (
-        <div className='todo-item' onClick={onClick}>
+        <div className='todo-item' onClick={onClick} data-id={id}>
             {title}
         </div>
     );
 };
+
+export const ListItem = memo(ListItemBase);

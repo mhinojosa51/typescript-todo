@@ -1,0 +1,39 @@
+@use "../../styles/variables";
+
+.full-container {
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & div.search-text-list-item {
+        width: 200px;
+        height: 20px;
+        border: 1px solid variables.$tron-orange;
+        cursor: pointer;
+    }
+}
+
+.search-callback {
+    width: 500px;
+    height: 40px;
+    border: 2px solid variables.$tron-blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & label {
+        font-size: 1.5rem;
+        color: variables.$tron-blue-four;
+        margin-right: 5px;
+    }
+
+    & input {
+        width: 350px;
+        height: 25px;
+        font-size: 1.3rem;
+        color: variables.$tron-blue-four;
+    }
+}

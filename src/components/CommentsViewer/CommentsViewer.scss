@@ -1,0 +1,42 @@
+@use "../../styles/variables";
+
+.comment-item {
+    color: variables.$tron-blue;
+    width: 100%;
+    height: auto;
+    min-height: 30px;
+    font-size: 1.3rem;
+    border: 2px solid variables.$tron-orange;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.comments-view-container {
+    width: calc(100vw - 16px);
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    gap: 5px;
+}
+
+.comments-view-comments-bar {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+.comments-section-details {
+    width: 65%;
+    height: auto;
+    min-height: 200px;
+    max-height: 300px;
+    border: 2px solid variables.$tron-blue-three;
+    padding: 10px;
+    transition: all ease-out 1s;
+
+    & h3 {
+        color: variables.$tron-blue;
+        font-size: 1.4rem;
+        text-align: left;
+    }
+}

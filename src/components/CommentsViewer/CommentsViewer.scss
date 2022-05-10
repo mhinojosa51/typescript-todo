@@ -1,0 +1,59 @@
+@use "../../styles/variables";
+
+.comment-item {
+    color: variables.$tron-blue;
+    width: 100%;
+    height: auto;
+    min-height: 30px;
+    font-size: 1.3rem;
+    border: 2px solid variables.$tron-orange;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background-color: variables.$dark-theme-hover;
+    }
+}
+
+.comments-view-container {
+    width: calc(100vw - 16px);
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.comments-view-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.comments-view-comments-bar {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+.comments-section-details {
+    width: 65%;
+    height: auto;
+    min-height: 200px;
+    max-height: 300px;
+    border: 2px solid variables.$tron-blue-three;
+    padding: 10px;
+    transition: all ease-out 1s;
+
+    & h3 {
+        color: variables.$tron-blue;
+        font-size: 1.4rem;
+        text-align: left;
+    }
+}
+
+#comments-section-header {
+    font-size: 1.7rem;
+    color: variables.$tron-blue-four;
+}

@@ -43,7 +43,6 @@ export const CommentsViewer: FunctionComponent = () => {
             | React.KeyboardEvent<HTMLDivElement>
     ) => {
         const rect = ev.currentTarget.getBoundingClientRect();
-        console.log(rect);
         const id = ev.currentTarget.dataset.id;
         if (id) {
             setCommentDescription(data[+id - 1].body);

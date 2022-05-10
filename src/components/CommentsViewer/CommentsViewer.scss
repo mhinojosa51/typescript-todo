@@ -9,6 +9,11 @@
     border: 2px solid variables.$tron-orange;
     padding: 10px;
     cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background-color: variables.$dark-theme-hover;
+    }
 }
 
 .comments-view-container {
@@ -16,7 +21,14 @@
     height: auto;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     gap: 5px;
+}
+
+.comments-view-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
 }
 
 .comments-view-comments-bar {
@@ -39,4 +51,9 @@
         font-size: 1.4rem;
         text-align: left;
     }
+}
+
+#comments-section-header {
+    font-size: 1.7rem;
+    color: variables.$tron-blue-four;
 }

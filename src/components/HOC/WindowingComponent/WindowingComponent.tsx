@@ -4,42 +4,29 @@ import React, {
     useEffect,
     useRef,
     useState,
+    Children,
 } from "react";
-import throttle from "lodash/throttle";
-import { WindowTestingItem } from "./WindowingTestComp";
 import "./WindowingComponent.scss";
 
 type WindowingComponentProps = {
-    itemData: any[];
-    element: typeof WindowTestingItem;
+    children: React.ReactNode | React.ReactNode[];
+    itemHeight: number;
+    containerHeight: number;
 };
 
 export const WindowingComponent = ({
-    element,
-    itemData,
+    children,
+    itemHeight,
+    containerHeight,
 }: WindowingComponentProps) => {
-    const [elementsToRender, setElementsToRender] = useState<any[]>([]);
-    const [placeHolderBottomRows, setPlaceHolderBottomRows] = useState<number>(
-        itemData.length - 6
+    const maxRowsToShow = Math.round(containerHeight / itemHeight);
+    const [placeHolderBottomRows] = useState<number>(
+        Children.count(children) - maxRowsToShow
     );
 
-    const currentScrollPos = useRef<number>(0);
     const [scrollRows, setScrollRows] = useState<number>(0);
 
-    useEffect(() => {
-        let elements = [];
-        for (let i = scrollRows; i < scrollRows + 6; i++) {
-            elements.push(
-                createElement(element, { name: itemData[i] + 1, key: i })
-            );
-        }
-
-        setElementsToRender(elements);
-    }, [scrollRows, element, itemData]);
-
     const handleScroll = (ev: React.UIEvent<HTMLDivElement>) => {
-        currentScrollPos.current = ev.currentTarget.scrollTop;
-
         const diff = scrollDiff(
             ev.currentTarget.scrollTop,
             ev.currentTarget.clientHeight
@@ -50,20 +37,17 @@ export const WindowingComponent = ({
         }
     };
 
-    const scrollDirection = (oldPos: number, newPos: number) => {
-        return oldPos > newPos ? "up" : "down";
-    };
-
     const scrollDiff = (scrollTop: number, clientHeight: number) => {
-        return Math.abs(Math.floor(scrollTop / 48));
+        return Math.abs(Math.floor(scrollTop / itemHeight));
     };
-
-    console.log(scrollRows);
 
     return (
         <div className='windowing-component-container' onScroll={handleScroll}>
             <div style={{ height: `${scrollRows * 48}px` }}></div>
-            {elementsToRender}
+            {Children.toArray(children).slice(
+                scrollRows,
+                scrollRows + maxRowsToShow
+            )}
             <div
                 style={{
                     height: `${(placeHolderBottomRows - scrollRows) * 48}px`,

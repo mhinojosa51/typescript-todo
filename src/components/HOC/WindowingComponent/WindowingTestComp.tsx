@@ -29,7 +29,7 @@ export const WindowingTestComponent = () => {
     return (
         <div className='comments-view-container'>
             <h3 id='comments-section-header'>Windowing Component</h3>
-            <WindowingComponent itemHeight={48} containerHeight={300}>
+            <WindowingComponent itemHeight={48} containerHeight={600}>
                 {Arr.map((item, idx) => {
                     return (
                         <WindowTestingItem
